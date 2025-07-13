@@ -1,4 +1,4 @@
-# Тестовое задание компании Inssmart (МК Групп) - выполнила `Александра Бужор`
+# Тестовое задание компании Inssmart (МК Групп) - выполнил `Илья Трофимов`
 
 - [ ] [Файл](https://github.com/AngryCFO/my_testproject_Inssmart-/blob/a106da4dcd6c5cb08082ed805ee6b370128be73e/Testovoe-zadanie-kompanii-Inssmart.pdf) с презентацией решения тестового задания 
   
