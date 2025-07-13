@@ -1,0 +1,146 @@
+{
+	"info": {
+		"_postman_id": "6e1056da-d21e-4b28-b416-cc15e4a6cc35",
+		"name": "Petstore API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "45179172",
+		"_collection_link": "https://jhondoe-1414867.postman.co/workspace/Jhon-Doe's-Workspace~e0e3c92a-49e4-41a4-8f57-d7ac33906b5c/collection/45179172-6e1056da-d21e-4b28-b416-cc15e4a6cc35?action=share&source=collection_link&creator=45179172"
+	},
+	"item": [
+		{
+			"name": "Create Pet",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Получение id созданного питомца из ответа\r",
+							"const responseJson = pm.response.json();\r",
+							"const petId = responseJson.id;\r",
+							"\r",
+							"// Запись id в окружение\r",
+							"pm.environment.set(\"petId\", petId);\r",
+							"console.log(\"Pet ID saved to environment:\", petId);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Doggie\",\r\n    \"photoUrls\": [\r\n        \"string\"\r\n    ],\r\n    \"status\": \"available\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://petstore.swagger.io/v2/pet",
+					"protocol": "https",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"pet"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Pet Status to Sold",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Получение тела ответа\r",
+							"const responseJson = pm.response.json();\r",
+							"\r",
+							"// Изменяем параметр status на 'sold'\r",
+							"responseJson.status = 'sold';\r",
+							"\r",
+							"// Отправляем обновленный объект через sendRequest\r",
+							"pm.sendRequest({\r",
+							"    url: 'https://petstore.swagger.io/v2/pet',\r",
+							"    method: 'PUT',\r",
+							"    header: {\r",
+							"        'Content-Type': 'application/json'\r",
+							"    },\r",
+							"    body: {\r",
+							"        mode: 'raw',\r",
+							"        raw: JSON.stringify(responseJson)\r",
+							"    }\r",
+							"}, function (err, res) {\r",
+							"    if (err) {\r",
+							"        console.log('Error updating pet:', err);\r",
+							"    } else {\r",
+							"        console.log('Pet status updated to sold.');\r",
+							"    }\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": {{petId}},\r\n    \"name\": \"Doggie\",\r\n    \"photoUrls\": [\r\n        \"string\"\r\n    ],\r\n    \"status\": \"sold\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://petstore.swagger.io/v2/pet",
+					"protocol": "https",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"pet"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
