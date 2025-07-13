@@ -1,24 +1,14 @@
-# `Case 4` - Клиенты, сделавшие более пяти заказов - `Александра Бужор`
+# `Case 4` - Клиенты, сделавшие более пяти заказов - `Трофимов Илья`
 
 ## Запрос SQL:
 ```
-SELECT 
-    Customers.CustomerID, 
-    Customers.CustomerName, 
-    COUNT(Orders.OrderID) AS NumberOfOrders, 
-    MAX(Orders.OrderDate) AS LastOrderDate
-FROM 
-    Customers, Orders
-WHERE 
-    Customers.CustomerID = Orders.CustomerID
-GROUP BY 
-    Customers.CustomerID, 
-    Customers.CustomerName
-HAVING 
-    COUNT(Orders.OrderID) > 5
-ORDER BY 
-    COUNT(Orders.OrderID) DESC;
+SELECT Customers.CustomerID, 
+       ContactName, 
+       COUNT(OrderID), 
+       MAX(OrderDate)
+FROM Orders
+LEFT JOIN Customers ON Customers.CustomerID = Orders.CustomerID
+GROUP BY Customers.CustomerID, ContactName
+HAVING COUNT(OrderID) > 5
+ORDER BY COUNT(OrderID) DESC;
 ```
-## Результат:
-
-![image](https://github.com/user-attachments/assets/a150a672-2a38-46bd-9d88-715676c52e8d)
